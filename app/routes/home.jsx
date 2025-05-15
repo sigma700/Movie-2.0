@@ -1,5 +1,6 @@
 import {Welcome} from "../welcome/welcome";
 import {Link} from "react-router";
+import {useState} from "react";
 
 export function meta() {
   return [
@@ -108,7 +109,10 @@ const movies = [
   },
 ];
 
+//function for shoing hidden content in my app
+
 export default function Home() {
+  const [isVisible, setIsVisible] = useState(false);
   return (
     <main>
       <div className="cont bg-gradient-to-br from-stone-900 to-cyan-900">
@@ -118,26 +122,47 @@ export default function Home() {
             src="/assets/images/1381542-3840x2160-desktop-4k-movie-poster-wallpaper-photo.jpg"
             alt=""
           />
-          <div className="nav-bar-area flex justify-between absolute top-[10px] w-full p-[10px]">
-            <img
-              className="w-[20px] lg:hidden"
-              src="/assets/images/menu.svg"
-              alt=""
-            />
-            <ul className="hidden  lg:flex lg:gap-[100px]">
+          <nav className="nav-bar-area flex justify-between absolute top-[10px] w-full p-[10px]">
+            <button
+              className="lg:hidden"
+              onClick={() => setIsVisible(!isVisible)}
+            >
+              <img className="w-[20px] " src="/assets/images/menu.svg" alt="" />
+            </button>
+
+            {/* for desktop  */}
+            <ul className=" hidden lg:flex lg:gap-[50px] lg:p-[10px]">
               <li>
-                <Link to="/">Home</Link>
+                <Link to={"/"}>Home</Link>
               </li>
               <li>
-                <a href="">Tv Shows</a>
+                <Link to={"/shows"}>Tv Shows</Link>
               </li>
               <li>
-                <Link to="/movies">Movies</Link>
+                <Link to={"/series"}>Tv series</Link>
               </li>
               <li>
-                <a href="/series">Tv series</a>
+                <Link to={"/movies"}>Movies</Link>
               </li>
             </ul>
+
+            {/* for mobile */}
+            {isVisible && (
+              <ul className="lg:hidden bg-gray-700 p-[5px] absolute left-0 top-10">
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <a href="">Tv Shows</a>
+                </li>
+                <li>
+                  <Link to="/movies">Movies</Link>
+                </li>
+                <li>
+                  <a href="/series">Tv series</a>
+                </li>
+              </ul>
+            )}
             <form className="relative h-fit" action="">
               <input
                 className="bg-white text-black rounded-[10px] p-[5px]"
@@ -150,7 +175,7 @@ export default function Home() {
                 alt=""
               />
             </form>
-          </div>
+          </nav>
           <div className="player absolute top-1/4  lg:top-1/2 lg:-translate-y-1/2  lg:w-[600px] ml-[30px]">
             <h1 className="lg:text-[70px]">Black Panther</h1>
             <p className="text-[11px] lg:text-[15px]">
@@ -159,7 +184,7 @@ export default function Home() {
               wakanda who are well blesssed with abundant resources
             </p>
             <div className="controls flex items-center gap-[50px] lg:mt-[30px]">
-              <div className="play bg-white w-fit flex p-[10px] text-black items-center gap-[10px] rounded-[10px] mt-[10px] lg:p-[20px]">
+              <div className="play bg-white w-fit flex p-[10px] text-black items-center gap-[10px] rounded-[10px] mt-[10px] lg:p-[20px] hover:bg-transparent hover:border-[1px] hover:cursor-pointer hover:text-white hover:transition-colors duration-[0.2s] ">
                 <img
                   className="w-[20px] lg:w-[30px]"
                   src="/assets/images/play.svg"
