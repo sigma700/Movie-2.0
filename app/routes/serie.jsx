@@ -2,18 +2,22 @@ import {useNavigate} from "react-router";
 
 export async function loader({params}) {
   let id = params.id;
-  let moviesRes = await fetch(`https://api.themoviedb.org/3/movie/${id}`, {
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${process.env.API_KEY}`,
-    },
-  });
-  let movie = await moviesRes.json();
-  return movie;
+  let seriesRes = await fetch(
+    ` https://api.themoviedb.org/3/tv/${id}`,
+
+    {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.API_KEY}`,
+      },
+    }
+  );
+  let serie = await seriesRes.json();
+  return serie;
 }
 
-export default function Movie({loaderData}) {
-  console.log({movie: loaderData});
+export default function indivSerie({loaderData}) {
+  console.log({serie: loaderData});
 
   const navigate = useNavigate();
   return (
@@ -34,7 +38,7 @@ export default function Movie({loaderData}) {
       <div className="flex flex-col lg:flex-row cont gap-[30px] lg:gap-[30px]">
         <img
           className="rounded-[10px] w-[300px]"
-          src={`https://image.tmdb.org/t/p/w500/${loaderData}`}
+          src={`https://image.tmdb.org/t/p/w500/${loaderData.poster_path}`}
           alt=""
         />
         <p className="font-light">{loaderData.overview}</p>
