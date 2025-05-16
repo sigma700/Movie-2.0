@@ -8,10 +8,11 @@ export async function loader() {
       Authorization: `Bearer ${process.env.API_KEY}`,
     },
   });
+  //getting it as json
   let series = await seriesRes.json();
   return series.results;
 }
-
+//ro render all the available data into our UI
 export default function Series({loaderData}) {
   console.log({series: loaderData});
   return (

@@ -1,3 +1,5 @@
+//this file is where we add all the shared components
+import {Link} from "react-router";
 import {
   isRouteErrorResponse,
   Links,
@@ -10,7 +12,7 @@ import {
 import "./app.css";
 
 export const links = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  {rel: "preconnect", href: "https://fonts.googleapis.com"},
   {
     rel: "preconnect",
     href: "https://fonts.gstatic.com",
@@ -22,7 +24,7 @@ export const links = () => [
   },
 ];
 
-export function Layout({ children }) {
+export function Layout({children}) {
   return (
     <html lang="en">
       <head>
@@ -31,7 +33,23 @@ export function Layout({ children }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="flex h-screen items-center justify-center">
+        <nav>
+          {/* <ul>
+            <li>
+              <Link to={"/home"}>Home</Link>
+            </li>
+            <li>
+              <Link to={"/home"}>Movies</Link>
+            </li>
+            <li>
+              <Link to={"/home"}>Tv series</Link>
+            </li>
+            <li>
+              <Link to={"/home"}>Tv shows</Link>
+            </li>
+          </ul> */}
+        </nav>
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -44,7 +62,7 @@ export default function App() {
   return <Outlet />;
 }
 
-export function ErrorBoundary({ error }) {
+export function ErrorBoundary({error}) {
   let message = "Oops!";
   let details = "An unexpected error occurred.";
   let stack;

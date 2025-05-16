@@ -1,5 +1,5 @@
 import {Link} from "react-router";
-
+import {NavLink} from "react-router";
 export default function SeriesMedia({name, rates, seriesPoster, release, id}) {
   return (
     <main>
@@ -15,6 +15,7 @@ export default function SeriesMedia({name, rates, seriesPoster, release, id}) {
           <small>Date released:{release}</small> <br />
           <Link
             to={`/series/${id}`}
+            prefetch="intent"
             className="p-[10px] w-[100px] bg-teal-500 rounded-[10px] mt-[20px]"
           >
             Details

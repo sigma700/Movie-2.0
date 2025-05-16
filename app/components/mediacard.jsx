@@ -1,4 +1,5 @@
-import {Link} from "react-router";
+import {Link, NavLink} from "react-router";
+// import {NavLink} from "react-router";
 export default function MediaCard({posterPath, title, rating, release, id}) {
   return (
     <main>
@@ -19,6 +20,7 @@ export default function MediaCard({posterPath, title, rating, release, id}) {
             <Link
               className="bg-teal-600 p-[10px] w-[100px] rounded-[10px] font-light"
               to={`/movies/${id}`}
+              prefetch="intent"
             >
               Details
             </Link>

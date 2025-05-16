@@ -6,4 +6,5 @@ export default [
   route("movies/:id", "routes/movie.jsx"),
   route("series", "routes/series.jsx"),
   route("series/:id", "routes/serie.jsx"),
+  route("contact", "routes/contact.jsx"),
 ];
