@@ -30,6 +30,8 @@ export async function action({request}) {
     );
   }
 
+  //sending the email
+
   return null;
 }
 
