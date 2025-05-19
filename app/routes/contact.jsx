@@ -16,6 +16,37 @@ export async function action({request}) {
 
   //form validation
 
+  let transporter = nodemailer.createTransport({
+    // service: "gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: "allankirimi65@gmail.com",
+      pass: "qtup vbjk gmsd stkc",
+    },
+  });
+
+  transporter.sendMail(
+    {
+      from: "allankirimi65@gmail.com",
+      to: "allankirimi65@gmail.com",
+      subject: `New message from ${name}`,
+      text: `
+    Name : ${name}
+    Email : ${email}
+    Phone : ${phone}
+    Message : ${message}
+    `,
+    },
+    (error, info) => {
+      if (error) {
+        return console.log("Error sending email:", error);
+      }
+      console.log("Email sent:", info.response);
+    }
+  );
+
   let fieldErrors = {
     name: validateText(name),
     phone: validatePhone(phone),
@@ -27,33 +58,6 @@ export async function action({request}) {
 }
 
 //seending the email
-
-let transporter = nodemailer.createTransport({
-  // service: "gmail",
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: "allankirimi65@gmail.com",
-    pass: "qtup vbjk gmsd stkc",
-  },
-});
-
-transporter.sendMail(
-  {
-    from: "allankirimi65@gmail.com",
-    to: "dennisgitau83@gmail.com",
-    subject: "Hello",
-
-    text: "Message to be sent",
-  },
-  (error, info) => {
-    if (error) {
-      return console.log("Error sending email:", error);
-    }
-    console.log("Email sent:", info.response);
-  }
-);
 
 export default function Contacts({actionData}) {
   console.log({actionData});
