@@ -1,7 +1,10 @@
 import {filledInputClasses} from "@mui/material";
 import {validateEmail, validatePhone, validateText} from "../server/validtion";
 import {data} from "react-router";
+import {sendMail} from "../server/nodemailer";
+import nodemailer from "nodemailer";
 import {Form} from "react-router";
+// import {Subject} from "@mui/icons-material";
 
 export async function action({request}) {
   let formData = await request.formData();
@@ -20,20 +23,37 @@ export async function action({request}) {
     message: validateText(message),
   };
 
-  if (Object.values(fieldErrors).some(Boolean)) {
-    return data(
-      {fieldErrors},
-      {
-        status: 400,
-        statusText: "Bad request",
-      }
-    );
-  }
-
-  //sending the email
-
   return null;
 }
+
+//seending the email
+
+let transporter = nodemailer.createTransport({
+  // service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "allankirimi65@gmail.com",
+    pass: "qtup vbjk gmsd stkc",
+  },
+});
+
+transporter.sendMail(
+  {
+    from: "allankirimi65@gmail.com",
+    to: "dennisgitau83@gmail.com",
+    subject: "Hello",
+
+    text: "Message to be sent",
+  },
+  (error, info) => {
+    if (error) {
+      return console.log("Error sending email:", error);
+    }
+    console.log("Email sent:", info.response);
+  }
+);
 
 export default function Contacts({actionData}) {
   console.log({actionData});
@@ -105,6 +125,7 @@ export default function Contacts({actionData}) {
 
           <FormSpacer>
             <button
+              onClick={sendMail}
               className="bg-teal-600 mt-[30px] w-fit p-[10px] rounded-[10px]"
               type="submit"
             >

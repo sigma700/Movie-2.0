@@ -33,7 +33,7 @@ export function Layout({children}) {
         <Meta />
         <Links />
       </head>
-      <body className="flex h-screen items-center justify-center">
+      <body className="flex h-full items-center justify-center">
         <nav>
           {/* <ul>
             <li>
